@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../build/Test.props"/>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Sharpener.Stratus.Api\Sharpener.Stratus.Api.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Shouldly" Version="4.3.0"/>
+  </ItemGroup>
+</Project>
