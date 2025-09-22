@@ -1,7 +1,12 @@
+// The Sharpener project licenses this file to you under the MIT license.
+
 using System.Text.Json.Serialization;
 
 namespace Sharpener.Stratus.Api.Responses;
 
+/// <summary>
+///     A response type for ping requests.
+/// </summary>
 public class StratusPing
 {
     /// <summary>

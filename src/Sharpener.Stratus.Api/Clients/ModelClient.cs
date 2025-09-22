@@ -1,3 +1,5 @@
+// The Sharpener project licenses this file to you under the MIT license.
+
 using Sharpener.Rest.Extensions;
 using Sharpener.Rest.Retry;
 using Sharpener.Results;
@@ -39,7 +41,7 @@ public class ModelClient : BaseClient
             .SetPaths(version, "model", modelId)
             .UseRetry(retry)
             .GetAsync()
-            .ReadJsonAs<StratusModel>();
+            .ReadJsonAs<StratusModel>().ConfigureAwait(false);
     }
 
     /// <summary>
@@ -64,6 +66,6 @@ public class ModelClient : BaseClient
             .AddQuery("viewId", viewId)
             .UseRetry(retry)
             .GetAsync()
-            .ReadJsonAs<string>();
+            .ReadJsonAs<string>().ConfigureAwait(false);
     }
 }

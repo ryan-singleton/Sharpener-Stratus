@@ -1,7 +1,12 @@
+// The Sharpener project licenses this file to you under the MIT license.
+
 using Sharpener.Rest.Extensions;
 
 namespace Sharpener.Stratus.Api.Clients;
 
+/// <summary>
+///     The base client with shared behavior among all other endpoint-based clients.
+/// </summary>
 public class BaseClient
 {
     /// <summary>

@@ -1,3 +1,5 @@
+// The Sharpener project licenses this file to you under the MIT license.
+
 using Sharpener.Rest;
 using Sharpener.Rest.Extensions;
 using Sharpener.Rest.Retry;
@@ -41,7 +43,7 @@ public class PingClient : BaseClient
             .SetPaths(version, "ping")
             .UseRetry(retry)
             .GetAsync()
-            .ReadJsonAs<StratusPing>();
+            .ReadJsonAs<StratusPing>().ConfigureAwait(false);
     }
 
     /// <summary>

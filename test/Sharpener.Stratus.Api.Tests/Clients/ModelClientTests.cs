@@ -26,12 +26,12 @@ public class ModelClientTests
 
         var modelClient = new ModelClient(_clientFactory);
 
-        var model = await modelClient.GetModel(appKey, modelId);
+        var model = await modelClient.GetModel(appKey, modelId).ConfigureAwait(false);
         model.IsSuccess.ShouldBeTrue();
         model.Value.ShouldNotBeNull();
         model.Value.Id.ShouldBe(modelId);
 
-        var report = await modelClient.GetModelReport(appKey, modelId, reportId);
+        var report = await modelClient.GetModelReport(appKey, modelId, reportId).ConfigureAwait(false);
         report.IsSuccess.ShouldBeTrue();
         report.Value.ShouldNotBeNull();
         report.Value.ShouldNotBeNullOrWhiteSpace();
