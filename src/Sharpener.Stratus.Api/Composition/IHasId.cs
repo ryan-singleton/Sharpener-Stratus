@@ -3,7 +3,7 @@
 namespace Sharpener.Stratus.Api.Composition;
 
 /// <summary>
-///     The shape of any reference that will contain an Id property.
+///     The shape of any reference that will contain an identifier property.
 /// </summary>
 public interface IHasId
 {
