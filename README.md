@@ -52,7 +52,7 @@ Standards as-yet to be determined:
 ## Contributing
 
 This is the early stages of this project, so it may not be the best time yet to get involved, but as the shape of this
-effort begins to flesh out, you may find yourself wanting to contribute. It is most welcome. It is a large API and will
+effort begins to flesh out, you may find yourself wanting to contribute. It is most welcome. It is a large API that will
 likely require responsiveness on our part so that we can stay up to date with the current version of the API. Help will
 be most appreciated as the maintainability of this project grows more imposing.
 
