@@ -17,170 +17,178 @@ public enum ActivityActionType
     /// <summary>
     ///     Data was created.
     /// </summary>
-    [Description("")] Created,
+    [Description("Created")] Created,
 
     /// <summary>
     ///     Data was modified.
     /// </summary>
-    [Description("")] Modified,
+    [Description("Modified")] Modified,
 
     /// <summary>
     ///     Data was deleted.
     /// </summary>
-    [Description("")] Deleted,
+    [Description("Deleted")] Deleted,
 
     /// <summary>
     ///     Something was activated.
     /// </summary>
-    [Description("")] Activated,
+    [Description("Activated")] Activated,
 
     /// <summary>
     ///     Data was archived.
     /// </summary>
-    [Description("")] Archived,
+    [Description("Archived")] Archived,
 
     /// <summary>
-    ///     A publish failed.
+    ///     A publish operation failed.
     /// </summary>
-    [Description("")] PublishFailed,
+    [Description("Publish Failed")] PublishFailed,
 
     /// <summary>
     ///     Data was published.
     /// </summary>
-    [Description("")] Published,
+    [Description("Published")] Published,
 
     /// <summary>
     ///     A tracking status changed.
     /// </summary>
-    [Description("")] TrackingStatusChanged,
+    [Description("Tracking Status Changed")]
+    TrackingStatusChanged,
 
     /// <summary>
     ///     Something was shipped.
     /// </summary>
-    [Description("")] Shipped,
+    [Description("Shipped")] Shipped,
 
     /// <summary>
     ///     Data was received.
     /// </summary>
-    [Description("")] Received,
+    [Description("Received")] Received,
 
     /// <summary>
     ///     Something was marked as completed.
     /// </summary>
-    [Description("")] Completed,
+    [Description("Completed")] Completed,
 
     /// <summary>
     ///     Something was assigned to a station.
     /// </summary>
-    [Description("")] AssignedToStation,
+    [Description("Assigned To Station")] AssignedToStation,
 
     /// <summary>
     ///     A date was changed.
     /// </summary>
-    [Description("")] DateChanged,
+    [Description("Date Changed")] DateChanged,
 
     /// <summary>
     ///     Data was locked.
     /// </summary>
-    [Description("")] Locked,
+    [Description("Locked")] Locked,
 
     /// <summary>
     ///     Data was unlocked.
     /// </summary>
-    [Description("")] Unlocked,
+    [Description("Unlocked")] Unlocked,
 
     /// <summary>
     ///     An action was reverted.
     /// </summary>
-    [Description("")] Reverted,
+    [Description("Reverted")] Reverted,
 
     /// <summary>
     ///     A quote was processed.
     /// </summary>
-    [Description("")] QuoteProcessed,
+    [Description("Quote Processed")] QuoteProcessed,
 
     /// <summary>
     ///     A purchase order was processed.
     /// </summary>
-    [Description("")] PurchaseOrderProcessed,
+    [Description("Purchase Order Processed")]
+    PurchaseOrderProcessed,
 
     /// <summary>
     ///     Something was invoiced.
     /// </summary>
-    [Description("")] Invoiced,
+    [Description("Invoiced")] Invoiced,
 
     /// <summary>
     ///     A set of item numbers were deleted.
     /// </summary>
-    [Description("")] DeletedItemNumbers,
+    [Description("Deleted Item Numbers")] DeletedItemNumbers,
 
     /// <summary>
     ///     Field Orderz was published.
     /// </summary>
-    [Description("")] FieldOrderzPublished,
+    [Description("Field Orderz Published")]
+    FieldOrderzPublished,
 
     /// <summary>
     ///     Field Orderz publish attempt failed.
     /// </summary>
-    [Description("")] FieldOrderzPublishFailed,
+    [Description("Field Orderz Publish Failed")]
+    FieldOrderzPublishFailed,
 
     /// <summary>
     ///     A lightning catalog was published.
     /// </summary>
-    [Description("")] LightningCatalogPublished,
+    [Description("Lightning Catalog Published")]
+    LightningCatalogPublished,
 
     /// <summary>
     ///     A lightning catalog publish attempt failed.
     /// </summary>
-    [Description("")] LightningCatalogPublishFailed,
+    [Description("Lightning Catalog Publish Failed")]
+    LightningCatalogPublishFailed,
 
     /// <summary>
     ///     A report failed to generate.
     /// </summary>
-    [Description("")] ReportFailed,
+    [Description("Report Failed")] ReportFailed,
 
     /// <summary>
     ///     A set of dimensions was deleted.
     /// </summary>
-    [Description("")] DeletedDimensions,
+    [Description("Deleted Dimensions")] DeletedDimensions,
 
     /// <summary>
     ///     An area for BIM was deleted.
     /// </summary>
-    [Description("")] BimAreaDeleted,
+    [Description("BIM Area Deleted")] BimAreaDeleted,
 
     /// <summary>
     ///     Areas for BIM were replaced.
     /// </summary>
-    [Description("")] BimAreasReplaced,
+    [Description("BIM Areas Replaced")] BimAreasReplaced,
 
     /// <summary>
     ///     An attachment was deleted.
     /// </summary>
-    [Description("")] AttachmentDeleted,
+    [Description("Attachment Deleted")] AttachmentDeleted,
 
     /// <summary>
     ///     Parts were deleted.
     /// </summary>
-    [Description("")] PartsDeleted,
+    [Description("Parts Deleted")] PartsDeleted,
 
     /// <summary>
     ///     A project role was added.
     /// </summary>
-    [Description("")] ProjectRoleAdded,
+    [Description("Project Role Added")] ProjectRoleAdded,
 
     /// <summary>
     ///     A default project role was removed.
     /// </summary>
-    [Description("")] DefaultProjectRoleRemoved,
+    [Description("Default Project Role Removed")]
+    DefaultProjectRoleRemoved,
 
     /// <summary>
     ///     A default project role changed.
     /// </summary>
-    [Description("")] DefaultProjectRoleChanged,
+    [Description("Default Project Role Changed")]
+    DefaultProjectRoleChanged,
 
     /// <summary>
     ///     A project role was removed.
     /// </summary>
-    [Description("")] ProjectRoleRemoved
+    [Description("Project Role Removed")] ProjectRoleRemoved
 }

@@ -5,7 +5,7 @@ namespace Sharpener.Stratus.Api.Composition;
 /// <summary>
 ///     The shape of any reference that will contain an identifier property.
 /// </summary>
-public interface IHasId
+public interface IIdentified
 {
     /// <summary>
     ///     The universally unique identifier of the reference.
