@@ -17,13 +17,13 @@ public class BaseClient
     /// <summary>
     ///     The base url for calling the Stratus API.
     /// </summary>
-    protected const string BaseUrl = "https://api.gtpstratus.com";
+    private const string BaseUrl = "https://api.gtpstratus.com";
 
     /// <summary>
     ///     A message that will warn users when potentially running afoul of socket exhaustion.
     ///     https://learn.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net
     /// </summary>
-    protected const string ObsoleteClientCtorMessage =
+    private const string ObsoleteClientCtorMessage =
         "The constructor that accepts an IHttpClientFactory is recommended as it follows Microsoft's recommended approach to HTTP request formation.";
 
     /// <summary>

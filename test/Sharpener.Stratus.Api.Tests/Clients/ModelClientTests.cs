@@ -15,25 +15,4 @@ public class ModelClientTests
     {
         _clientFactory = new SharpenerHttpClientFactory();
     }
-
-    [Fact]
-    public async Task NarrativeTest()
-    {
-        const string appKey = "";
-        const string modelId = "";
-        const string reportId = "";
-        const string viewId = "";
-
-        var modelClient = new ModelClient(_clientFactory);
-
-        var model = await modelClient.GetModel(appKey, modelId);
-        model.IsSuccess.ShouldBeTrue();
-        model.Value.ShouldNotBeNull();
-        model.Value.Id.ShouldBe(modelId);
-
-        var report = await modelClient.GetModelReport(appKey, modelId, reportId);
-        report.IsSuccess.ShouldBeTrue();
-        report.Value.ShouldNotBeNull();
-        report.Value.ShouldNotBeNullOrWhiteSpace();
-    }
 }

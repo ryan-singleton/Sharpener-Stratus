@@ -5,7 +5,7 @@
     <Description>Utilities for making HTTP requests to the Stratus API.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>stratus stratusapi aec revit bim vdc</PackageTags>
-    <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net9.0;net8.0;netstandard2.0</TargetFrameworks>
     <SharedPackageVersion>0.0.1</SharedPackageVersion>
     <AssemblyVersion>$(SharedPackageVersion)</AssemblyVersion>
     <FileVersion>$(SharedPackageVersion)</FileVersion>
@@ -21,5 +21,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Sharpener.Rest"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\"/>
   </ItemGroup>
 </Project>

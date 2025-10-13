@@ -14,12 +14,12 @@ public enum ModelType
     /// <summary>
     ///     The model type was not specified.
     /// </summary>
-    [Description("Unspecified")] Unspecified,
+    [Description(nameof(Unspecified))] Unspecified,
 
     /// <summary>
     ///     The model is from Autodesk Revit.
     /// </summary>
-    [Description("Revit")] Revit,
+    [Description(nameof(Revit))] Revit,
 
     /// <summary>
     ///     The model is from Autodesk AutoCAD.
@@ -39,7 +39,7 @@ public enum ModelType
     /// <summary>
     ///     The model is from Autodesk Navisworks.
     /// </summary>
-    [Description("Navisworks")] Navisworks,
+    [Description(nameof(Navisworks))] Navisworks,
 
     /// <summary>
     ///     The model is of the IFC file type.
@@ -49,17 +49,17 @@ public enum ModelType
     /// <summary>
     ///     The model is from Autodesk Inventor.
     /// </summary>
-    [Description("Inventor")] Inventor,
+    [Description(nameof(Inventor))] Inventor,
 
     /// <summary>
     ///     The model is from SketchUp.
     /// </summary>
-    [Description("SketchUp")] SketchUp,
+    [Description(nameof(SketchUp))] SketchUp,
 
     /// <summary>
     ///     The model is from Autodesk Revit Cloud.
     /// </summary>
-    [Description("RevitCloud")] RevitCloud,
+    [Description(nameof(RevitCloud))] RevitCloud,
 
     /// <summary>
     ///     The model is from Autodesk AutoCAD Cloud.
@@ -69,5 +69,5 @@ public enum ModelType
     /// <summary>
     ///     The model is from FieldOrderz.
     /// </summary>
-    [Description("FieldOrderz")] FieldOrderz
+    [Description(nameof(FieldOrderz))] FieldOrderz
 }

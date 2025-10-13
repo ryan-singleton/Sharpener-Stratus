@@ -14,10 +14,10 @@ public enum UnitType
     /// <summary>
     ///     Imperial measurement units.
     /// </summary>
-    [Description("Imperial")] Imperial,
+    [Description(nameof(Imperial))] Imperial,
 
     /// <summary>
     ///     Metric measurement units.
     /// </summary>
-    [Description("Metric")] Metric
+    [Description(nameof(Metric))] Metric
 }

@@ -1,0 +1,49 @@
+﻿@using Sharpener.Stratus.Blazor.Services
+@rendermode InteractiveServer
+@inject ConsoleService Console
+@inject IJSRuntime Js
+
+@if (!string.IsNullOrWhiteSpace(Console.Output))
+{
+    <div class="output-console d-flex flex-column flex-grow-1">
+        <textarea
+            id="stratusOutput"
+            class="form-control bg-dark-subtle overflow-auto p-2 m-1 w-100 flex-grow-1"
+            readonly
+            value="@Console.Output"
+        ></textarea>
+        <button class="w-auto align-self-center" style="width: 150px;" @onclick="Console.Clear">Clear</button>
+    </div>
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Console.OnChange += OnConsoleChanged;
+    }
+
+    private async void OnConsoleChanged()
+    {
+        await InvokeAsync(StateHasChanged);
+        await ScrollToBottom();
+    }
+
+    private async Task ScrollToBottom()
+    {
+        try
+        {
+            await Js.InvokeVoidAsync("scrollToBottom", "stratusOutput");
+        }
+        catch
+        {
+            // Element might not be rendered yet
+        }
+    }
+
+    public void Dispose()
+    {
+        Console.OnChange -= OnConsoleChanged;
+    }
+
+}

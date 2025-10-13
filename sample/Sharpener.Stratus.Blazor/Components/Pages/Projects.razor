@@ -1,0 +1,36 @@
+﻿@page "/projects"
+@using Sharpener.Stratus.Api.Clients
+@using Sharpener.Stratus.Blazor.Models
+@using Sharpener.Stratus.Blazor.Services
+@rendermode InteractiveServer
+@inject StratusSettings Settings
+@inject ProjectClient ProjectClient
+@inject ConsoleService Console
+
+<PageTitle>Stratus NuGet Projects</PageTitle>
+
+<h1>Stratus API</h1>
+
+<div class="content">
+    <div class="d-flex">
+        <button @onclick="GetProjects">Get Projects</button>
+        <span class="ms-2 align-self-center"> Where </span>
+        <input class="flex-shrink-1 align-middle ms-2 flex-grow-1" aria-label="Filter" @bind="_where"
+               @bind:event="oninput"/>
+    </div>
+</div>
+
+@code {
+    private const string WhereTooltip = "Filter on JSON property values. Example: To filter on two JSON properties: length eq '10' AND description == \"truck\". To get the last 30 days of data, use: createdDT ge DateTime.Now.AddDays(-30)";
+    private string? _where;
+
+    private async Task GetProjects()
+    {
+        var appKey = Settings.AppKey;
+        var outcome = await ProjectClient.GetProjects(appKey, options => { options.Where = _where; });
+        if (outcome.IsError) return;
+
+        Console.WriteToConsole("Get Projects success", outcome.Value);
+    }
+
+}

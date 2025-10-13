@@ -5,7 +5,7 @@ using Sharpener.Rest.Extensions;
 using Sharpener.Rest.Retry;
 using Sharpener.Results;
 using Sharpener.Stratus.Api.Extensions;
-using Sharpener.Stratus.Api.Responses;
+using Sharpener.Stratus.Api.Models.Responses;
 
 namespace Sharpener.Stratus.Api.Clients;
 
@@ -17,13 +17,7 @@ public class PingClient : BaseClient
     private string _partnerAppId = string.Empty;
 
     /// <inheritdoc />
-    protected PingClient(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
-    {
-    }
-
-    /// <inheritdoc />
-    [Obsolete(ObsoleteClientCtorMessage)]
-    protected PingClient(HttpClient httpClient) : base(httpClient)
+    public PingClient(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
     {
     }
 

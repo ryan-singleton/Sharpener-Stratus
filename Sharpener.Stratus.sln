@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpener.Stratus.Api", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpener.Stratus.Api.Tests", "test\Sharpener.Stratus.Api.Tests\Sharpener.Stratus.Api.Tests.csproj", "{A0B50744-E9C4-4AF6-832F-3248043AD2E3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{63B12E4F-F7DB-4B0F-A0DA-2FF297806E17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpener.Stratus.Blazor", "sample\Sharpener.Stratus.Blazor\Sharpener.Stratus.Blazor.csproj", "{5CB067A9-63C2-42E1-9B76-E84D435F4144}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +26,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F8046ED3-3C8D-44FA-8BAE-A9BB6281E750} = {DD36BAFE-2D94-441E-BBDC-484EE6E1FB89}
 		{A0B50744-E9C4-4AF6-832F-3248043AD2E3} = {17C60017-6185-49FD-9B11-5BA92FD3453E}
+		{5CB067A9-63C2-42E1-9B76-E84D435F4144} = {63B12E4F-F7DB-4B0F-A0DA-2FF297806E17}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F8046ED3-3C8D-44FA-8BAE-A9BB6281E750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -32,5 +37,9 @@ Global
 		{A0B50744-E9C4-4AF6-832F-3248043AD2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0B50744-E9C4-4AF6-832F-3248043AD2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0B50744-E9C4-4AF6-832F-3248043AD2E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CB067A9-63C2-42E1-9B76-E84D435F4144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB067A9-63C2-42E1-9B76-E84D435F4144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CB067A9-63C2-42E1-9B76-E84D435F4144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CB067A9-63C2-42E1-9B76-E84D435F4144}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -26,33 +26,30 @@ Behind the scenes, it handles retry logic and http client management.
 ## Notes
 
 This package currently is in the beginning phase. Standards of practice are being put into place so that future work can
-be fast, since the Stratus API is quite large. As of this writing, there are only 3 endpoints available. Ping, Get Model
-by ID, and Get Model Report by their IDs. However, it should be noted that the approach is settling in and there will
-soon be a full effort to fill them all out.
+be fast, since the Stratus API is quite large. As of this writing, there are only a handful of endpoints available.
+However, it should be noted that the approach is settling in and there will soon be a full effort to fill them all out.
+
+### Testing
+
+For manual testing, a Blazor project has been created in order for developers to easily write interfaces to test the
+endpoints that they create. The intent is to keep the sample web app as stock as possible, but libraries like Tailwind
+may be added in the future. The backend is still C#, but it's much easier to toss something together in this framework
+than it is in things like WPF or MAUI.
 
 Standards as-yet to be determined:
 
-- Auto camel casing of some properties.
-    - This may seem simple. It's not. You can set `System.Text.Json` to globally use camel casing on DTOs, but I'm not
-      interested in forcing that behavior throughout the entire app stack. I will probably be creating a class or
-      property attribute that automatically camel cases properties. For the meantime, I'm explicitly calling
-      `JsonPropertyName` and providing it. But I want the data types in library to feel first class. So the data types
-      themselves will not be using camel case.
-- Testing is very immature
-    - For the moment, you can test your work in the test project by manually supplying your app key and the IDs you need
-      for the calls you want. However, these test projects should be used for unit and integration testing later on. I
-      intend to build a thin UI where a developer can input the values that they want to test against the classes and
-      endpoints that they are contributing. But for starting out, it's a little backwards.
+- `Where` expression visitors will be useful for allowing a more programmatic interaction with the common "where" query
+  that often appears in paginated responses. But for now, manually written where queries are supported.
 - Composition will be leaned into heavily as we identify more and more "compositions" that are present in the Stratus
   API. That is to say, where you see repeated sets of associated properties, we will create an interface that outlines
   what those sets of properties or methods do, and then attribute them to the implementations. Ideally, I would like
   response types to have several interfaces apiece that they employ. For example
-  `StratusFoo : IHasId, IDateTimeLifecycle`
+  `StratusFoo : IIdentified, IDated`
 
 ## Contributing
 
-This is the early stages of this project, so it may not be the best time yet to get involved, but as the shape of this
-effort begins to flesh out, you may find yourself wanting to contribute. It is most welcome. It is a large API that will
-likely require responsiveness on our part so that we can stay up to date with the current version of the API. Help will
-be most appreciated as the maintainability of this project grows more imposing.
+If you would like to contribute, please create an issue in the GitHub repository and wait for feedback. If it is
+approved, you can create a new branch from that ticket and then create a PR when complete. Preference between rebase and
+merge isn't very strong, just be pragmatic in your choices. Please be as detailed in your PR as possible, including
+writing comments on your own PR to give hints and guidance for the code review. Thank you.
 

@@ -15,5 +15,5 @@ public interface IDated
     /// <summary>
     ///     When the reference was last updated as DateTime.
     /// </summary>
-    public DateTime Modified { get; set; }
+    public DateTime? Modified { get; set; }
 }

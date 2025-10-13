@@ -51,7 +51,7 @@ public class WhereExpressionVisitor : ExpressionVisitor
         if (node.Expression is { NodeType: ExpressionType.Parameter })
         {
             // This is a property access like "project.Name"
-            _queryBuilder.Append(node.Member.Name.ToCamelCase());
+            _queryBuilder.Append(node.Member.Name.ToLowerStart());
         }
         else if (node.Expression != null)
         {
@@ -73,7 +73,7 @@ public class WhereExpressionVisitor : ExpressionVisitor
         {
             Visit(node.Object); // Visit the property (e.g., "Name")
 
-            var methodName = node.Method.Name.ToCamelCase();
+            var methodName = node.Method.Name.ToLowerStart();
             _queryBuilder.Append($".{methodName}(");
 
             // Add arguments

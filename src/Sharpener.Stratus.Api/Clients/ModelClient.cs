@@ -4,7 +4,7 @@ using Sharpener.Rest.Extensions;
 using Sharpener.Rest.Retry;
 using Sharpener.Results;
 using Sharpener.Stratus.Api.Extensions;
-using Sharpener.Stratus.Api.Responses;
+using Sharpener.Stratus.Api.Models.Responses;
 
 namespace Sharpener.Stratus.Api.Clients;
 
@@ -15,12 +15,6 @@ public class ModelClient : BaseClient
 {
     /// <inheritdoc />
     public ModelClient(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
-    {
-    }
-
-    /// <inheritdoc />
-    [Obsolete(ObsoleteClientCtorMessage)]
-    public ModelClient(HttpClient httpClient) : base(httpClient)
     {
     }
 

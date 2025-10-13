@@ -1,0 +1,41 @@
+﻿@page "/"
+@using System.Text.RegularExpressions
+@using Sharpener.Stratus.Api.Clients
+@using Sharpener.Stratus.Blazor.Models
+@using Sharpener.Stratus.Blazor.Services
+@rendermode InteractiveServer
+@inject StratusSettings Settings
+@inject PingClient PingClient
+@inject ConsoleService Console
+
+<PageTitle>Stratus NuGet</PageTitle>
+
+<h1>Stratus API</h1>
+
+<div class="content">
+    @if (string.IsNullOrEmpty(Settings.AppKey))
+    {
+        <h2 class="content">A Stratus AppKey is Required</h2>
+    }
+    <div class="d-flex">
+        <span class="flex-shrink-1 me-4 align-self-center">App Key</span>
+        <input class="flex-shrink-1 align-middle" aria-label="App Key" type="password" @bind="Settings.AppKey"
+               @bind:event="oninput"/>
+        <button class="ms-2" @onclick="Ping">Test</button>
+    </div>
+</div>
+
+@code {
+
+    private async Task Ping()
+    {
+        var appKey = Settings.AppKey;
+        var outcome = await PingClient.Ping(appKey);
+        if (outcome.IsError) return;
+
+        outcome.Value!.AppKey = Regex.Replace(outcome.Value.AppKey, "[a-zA-Z0-9]", "*");
+
+        Console.WriteToConsole("Ping success", outcome.Value);
+    }
+
+}
