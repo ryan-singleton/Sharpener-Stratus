@@ -34,7 +34,36 @@ public class GetPageOptions<T>
     public string? Where { get; set; }
 
     /// <summary>
+    ///     Pass true to this optional query parameter if you want to generate STRATUS.Part.* properties and have them returned
+    ///     for the parts. When in use, query must be limited to a single model id. Defaults to false.
+    /// </summary>
+    public bool IncludeStratusProperties { get; set; }
+
+    /// <summary>
+    ///     Pass true to this optional query parameter if you want empty or null values removed from the part's Properties and
+    ///     PropertiesGtp collections to improve performance. Defaults to false.
+    /// </summary>
+    public bool ExcludeNullAndEmpty { get; set; }
+
+    /// <summary>
+    ///     A list of JSON properties to return. All remaining JSON properties will be removed from the JSON response. Example:
+    ///     id, description, cutListItems. Specific dictionary keys can be included as follows: properties["Family"],
+    ///     propertiesGtp["Material"].
+    /// </summary>
+    public string? Include { get; private set; }
+
+    /// <summary>
     ///     Optional retry logic. There is already a recommended default that retries 3 times with a backoff.
     /// </summary>
     public Action<RetryOptions>? Retry { get; set; }
+
+    /// <summary>
+    ///     Sets a list of JSON properties to return. All remaining JSON properties will be removed from the JSON response.
+    ///     Example: id, description, cutListItems. Specific dictionary keys can be included as follows: properties["Family"],
+    ///     propertiesGtp["Material"].
+    /// </summary>
+    public void SetIncludes(params string[] includes)
+    {
+        Include = string.Join(", ", includes);
+    }
 }

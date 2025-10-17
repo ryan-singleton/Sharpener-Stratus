@@ -1,5 +1,6 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
+using System.Text.Json.Nodes;
 using Sharpener.Rest.Extensions;
 using Sharpener.Rest.Retry;
 using Sharpener.Results;
@@ -26,7 +27,7 @@ public class ModelClient : BaseClient
     /// <param name="version">Optional. The version of the Stratus API to query. Defaults to version 1.</param>
     /// <param name="retry">The optional retry options, otherwise uses default retry backoff.</param>
     /// <returns>A <see cref="StratusModel" /> if successful.</returns>
-    public async Task<Outcome<StratusModel?>> GetModel(string authToken, string modelId, string version = "v1",
+    public async Task<Outcome<JsonObject?>> GetModel(string authToken, string modelId, string version = "v1",
         Action<RetryOptions>? retry = null)
     {
         return await HttpClient.Rest()
@@ -35,7 +36,7 @@ public class ModelClient : BaseClient
             .SetPaths(version, "model", modelId)
             .UseRetry(retry)
             .GetAsync()
-            .ReadJsonAs<StratusModel>().ConfigureAwait(false);
+            .ReadJsonAs<JsonObject>().ConfigureAwait(false);
     }
 
     /// <summary>

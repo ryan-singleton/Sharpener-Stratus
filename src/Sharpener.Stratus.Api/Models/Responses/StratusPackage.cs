@@ -1,5 +1,6 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using Sharpener.Stratus.Api.Composition;
 using Sharpener.Stratus.Api.Enums;
@@ -56,12 +57,12 @@ public class StratusPackage : IIdentified, IDated
     /// <summary>
     ///     The map of field identifiers to values.
     /// </summary>
-    public AdditionalProps FieldIdToValueMap { get; set; } = new();
+    public JsonObject FieldIdToValueMap { get; set; } = new();
 
     /// <summary>
     ///     The map of field names to values.
     /// </summary>
-    public AdditionalProps FieldNameToValueMap { get; set; } = new();
+    public JsonObject FieldNameToValueMap { get; set; } = new();
 
     /// <summary>
     ///     The optional estimated field hours.
@@ -155,7 +156,7 @@ public class StratusPackage : IIdentified, IDated
     /// <summary>
     ///     The selected task workflow identifiers for the assembly CAD parts.
     /// </summary>
-    public AdditionalProps SelectedTaskWorkflowIdsForAssemblyAndPartCadIds { get; set; } = new();
+    public JsonObject SelectedTaskWorkflowIdsForAssemblyAndPartCadIds { get; set; } = new();
 
     /// <summary>
     ///     The amount of hours involved in the shop scope.

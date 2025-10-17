@@ -1,5 +1,6 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
+using System.Text.Json.Nodes;
 using Sharpener.Rest.Extensions;
 using Sharpener.Results;
 using Sharpener.Stratus.Api.Extensions;
@@ -20,34 +21,33 @@ public class PackageClient : BaseClient
     }
 
     /// <summary>
-    ///     Gets a collection of <see cref="StratusPackage" /> references.
+    ///     Gets a collection of <see cref="JsonObject" /> references that represent packages.
     /// </summary>
     /// <param name="authToken">The "app-key" authorization token for the request.</param>
     /// <param name="configure">Optional configuration settings that come with fairly common defaults.</param>
-    /// <returns>A collection of <see cref="StratusPackage" />.</returns>
-    public async Task<Outcome<IEnumerable<StratusPackage>>> GetPackages(string authToken,
-        Action<GetPageOptions<StratusPackage>>? configure = null)
+    /// <returns>A collection of <see cref="JsonObject" />.</returns>
+    public async Task<Outcome<IEnumerable<JsonObject>>> GetPackages(string authToken,
+        Action<GetPageOptions<JsonObject>>? configure = null)
     {
-        var options = new GetPageOptions<StratusPackage>();
+        var options = new GetPageOptions<JsonObject>();
         configure?.Invoke(options);
 
-        var cursor = new PageCursor<StratusPackage>(null, null, async (page, pageSize) =>
+        var cursor = new PageCursor<JsonObject>(null, null, async (page, pageSize) =>
         {
             var results = await HttpClient.Rest()
                 .SetAppKey(authToken)
                 .SetHeader("accept", "application/json")
                 .SetPaths("v1", "package")
-                .AddQueries(new { page, pagesize = pageSize })
-                .AddQuery("where", options.Where)
+                .AddQueries(new { page, pagesize = pageSize, options.Where, options.Include })
                 .UseRetry(options.Retry)
                 .GetAsync()
-                .ReadJsonAs<Page<StratusPackage>>()
+                .ReadJsonAs<Page<JsonObject>>()
                 .ConfigureAwait(false);
 
             return results.Value!;
         });
 
-        var results = new List<StratusPackage>();
+        var results = new List<JsonObject>();
         while (await cursor.MoveNextAsync().ConfigureAwait(false))
         {
             results.AddRange(cursor.Current.Value.Data);
@@ -62,7 +62,7 @@ public class PackageClient : BaseClient
     /// <param name="authToken">The "app-key" authorization token for the request.</param>
     /// <param name="packageId">The identifier of the package.</param>
     /// <returns>The <see cref="StratusPackage" /> associated with the given identifier.</returns>
-    public async Task<Outcome<StratusPackage?>> GetPackage(string authToken, string packageId)
+    public async Task<Outcome<JsonObject?>> GetPackage(string authToken, string packageId)
     {
         return await HttpClient.Rest()
             .SetAppKey(authToken)
@@ -70,7 +70,7 @@ public class PackageClient : BaseClient
             .SetPaths("v1", "package", packageId)
             .UseRetry()
             .GetAsync()
-            .ReadJsonAs<StratusPackage>()
+            .ReadJsonAs<JsonObject>()
             .ConfigureAwait(false);
     }
 }

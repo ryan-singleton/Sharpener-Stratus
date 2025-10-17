@@ -1,5 +1,6 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
+using System.Text.Json.Nodes;
 using Sharpener.Rest;
 using Sharpener.Rest.Extensions;
 using Sharpener.Rest.Retry;
@@ -28,7 +29,7 @@ public class PingClient : BaseClient
     /// <param name="version">Optional. The version of the API to query. Defaults to <see cref="Version" /></param>
     /// <param name="retry">The optional retry options, otherwise uses default retry backoff.</param>
     /// <returns>A <see cref="StratusPing" /> if successful.</returns>
-    public async Task<Outcome<StratusPing?>> Ping(string authToken, string version = Version,
+    public async Task<Outcome<JsonObject?>> Ping(string authToken, string version = Version,
         Action<RetryOptions>? retry = null)
     {
         return await MaybeSetPartnerAppHeader(HttpClient.Rest())
@@ -37,7 +38,7 @@ public class PingClient : BaseClient
             .SetPaths(version, "ping")
             .UseRetry(retry)
             .GetAsync()
-            .ReadJsonAs<StratusPing>().ConfigureAwait(false);
+            .ReadJsonAs<JsonObject>().ConfigureAwait(false);
     }
 
     /// <summary>

@@ -1,6 +1,8 @@
 ﻿@page "/"
 @using System.Text.RegularExpressions
 @using Sharpener.Stratus.Api.Clients
+@using Sharpener.Stratus.Api.Extensions
+@using Sharpener.Stratus.Api.Models.Responses
 @using Sharpener.Stratus.Blazor.Models
 @using Sharpener.Stratus.Blazor.Services
 @rendermode InteractiveServer
@@ -32,10 +34,9 @@
         var appKey = Settings.AppKey;
         var outcome = await PingClient.Ping(appKey);
         if (outcome.IsError) return;
-
-        outcome.Value!.AppKey = Regex.Replace(outcome.Value.AppKey, "[a-zA-Z0-9]", "*");
-
-        Console.WriteToConsole("Ping success", outcome.Value);
+        var ping = outcome.Value!.As<StratusPing>()!;
+        ping.AppKey = Regex.Replace(ping.AppKey, "[a-zA-Z0-9]", "*");
+        Console.WriteToConsole("Ping success", ping);
     }
 
 }

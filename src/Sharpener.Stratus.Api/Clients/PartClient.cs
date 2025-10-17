@@ -10,22 +10,22 @@ using Sharpener.Stratus.Api.Models.Pagination;
 namespace Sharpener.Stratus.Api.Clients;
 
 /// <summary>
-///     The client for interacting with the Project endpoints on the Stratus API.
+///     The client for interacting with the Part endpoints on the Stratus API.
 /// </summary>
-public class ProjectClient : BaseClient
+public class PartClient : BaseClient
 {
     /// <inheritdoc />
-    public ProjectClient(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+    public PartClient(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
     {
     }
 
     /// <summary>
-    ///     Gets a collection of <see cref="JsonObject" /> references that represent Stratus projects.
+    ///     Gets a collection of <see cref="JsonObject" /> references that represent parts.
     /// </summary>
     /// <param name="authToken">The "app-key" authorization token for the request.</param>
     /// <param name="configure">Optional configuration settings that come with fairly common defaults.</param>
     /// <returns>A collection of <see cref="JsonObject" />.</returns>
-    public async Task<Outcome<IEnumerable<JsonObject>>> GetProjects(string authToken,
+    public async Task<Outcome<IEnumerable<JsonObject>>> GetParts(string authToken,
         Action<GetPageOptions<JsonObject>>? configure = null)
     {
         var options = new GetPageOptions<JsonObject>();
@@ -36,7 +36,7 @@ public class ProjectClient : BaseClient
             var results = await HttpClient.Rest()
                 .SetAppKey(authToken)
                 .SetHeader("accept", "application/json")
-                .SetPaths("v2", "project")
+                .SetPaths("v1", "part")
                 .AddQueries(new { page, pagesize = pageSize, options.Where, options.Include })
                 .UseRetry(options.Retry)
                 .GetAsync()

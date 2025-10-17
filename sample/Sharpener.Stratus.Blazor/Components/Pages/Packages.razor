@@ -27,7 +27,7 @@
     private async Task GetPackages()
     {
         var appKey = Settings.AppKey;
-        var outcome = await PackageClient.GetPackages(appKey, options => { options.Where = _where; });
+        var outcome = await PackageClient.GetPackages(appKey, options => options.Where = _where);
         if (outcome.IsError) return;
 
         Console.WriteToConsole("Get Packages success", outcome.Value);

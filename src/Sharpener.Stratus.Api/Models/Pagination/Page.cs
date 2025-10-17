@@ -1,5 +1,6 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using Sharpener.Stratus.Api.Json;
 using Sharpener.Stratus.Api.Models.Responses;
@@ -56,5 +57,5 @@ public sealed class Page<T>
     /// <summary>
     ///     The additional properties to the paginated data.
     /// </summary>
-    public AdditionalProps Links { get; set; } = new();
+    public JsonObject Links { get; set; } = new();
 }
