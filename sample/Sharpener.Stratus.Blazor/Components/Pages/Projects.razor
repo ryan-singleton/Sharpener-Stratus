@@ -27,7 +27,11 @@
     private async Task GetProjects()
     {
         var appKey = Settings.AppKey;
-        var outcome = await ProjectClient.GetProjects(appKey, options => { options.Where = _where; });
+        var outcome = await ProjectClient.GetProjects(appKey, options =>
+        {
+            options.Where = _where;
+            options.SetIncludes("id", "name");
+        });
         if (outcome.IsError) return;
 
         Console.WriteToConsole("Get Projects success", outcome.Value);

@@ -21,7 +21,6 @@ public class ConsoleService
             ? $"{description}{Environment.NewLine}{value.WritePrettyJson()}"
             : $"{Output},{Environment.NewLine}{description}{Environment.NewLine}{value.WritePrettyJson()}";
 
-
         OnChange?.Invoke();
     }
 
