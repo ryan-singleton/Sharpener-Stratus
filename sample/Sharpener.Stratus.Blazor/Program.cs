@@ -1,3 +1,5 @@
+// The Sharpener project licenses this file to you under the MIT license.
+
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Sharpener.Stratus.Blazor.Components;
 using Sharpener.Stratus.Blazor.Extensions;
@@ -22,7 +24,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 
 app.UseAntiforgery();
 
