@@ -26,18 +26,21 @@ public class ProjectClient : BaseClient
     /// <param name="configure">Optional configuration settings that come with fairly common defaults.</param>
     /// <returns>A collection of <see cref="JsonProject" />.</returns>
     public async Task<Outcome<IEnumerable<JsonProject>>> GetProjects(string authToken,
-        Action<GetPageOptions<JsonProject>>? configure = null)
+        Action<GetPageOptions>? configure = null)
     {
-        return await GetAllPages(async (page, pageSize, options) =>
-                await HttpClient.Rest()
-                    .SetAppKey(authToken)
-                    .SetHeader("accept", "application/json")
-                    .SetPaths("v2", "project")
-                    .AddQueries(new { page, pagesize = pageSize, options.Where, options.Include })
-                    .UseRetry(options.Retry)
-                    .GetAsync()
-                    .ReadJsonAs<Page<JsonProject>>()
-                    .ConfigureAwait(false), configure)
+        var options = new GetPageOptions();
+        configure?.Invoke(options);
+
+        return await new PageCursor<JsonProject>(async (page, pageSize) => await HttpClient.Rest()
+                .SetAppKey(authToken)
+                .SetHeader("accept", "application/json")
+                .SetPaths("v2", "project")
+                .AddQueries(new { page, pagesize = pageSize, options.Where, options.Include })
+                .UseRetry(options.Retry)
+                .GetAsync()
+                .ReadJsonAs<Page<JsonProject>>()
+                .ConfigureAwait(false))
+            .GetAllPages()
             .ConfigureAwait(false);
     }
 }

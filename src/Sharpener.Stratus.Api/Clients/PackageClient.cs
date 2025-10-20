@@ -26,18 +26,21 @@ public class PackageClient : BaseClient
     /// <param name="configure">Optional configuration settings that come with fairly common defaults.</param>
     /// <returns>A collection of <see cref="JsonPackage" />.</returns>
     public async Task<Outcome<IEnumerable<JsonPackage>>> GetPackages(string authToken,
-        Action<GetPageOptions<JsonPackage>>? configure = null)
+        Action<GetPageOptions>? configure = null)
     {
-        return await GetAllPages(async (page, pageSize, options) =>
-                await HttpClient.Rest()
-                    .SetAppKey(authToken)
-                    .SetHeader("accept", "application/json")
-                    .SetPaths("v1", "package")
-                    .AddQueries(new { page, pagesize = pageSize, options.Where, options.Include })
-                    .UseRetry(options.Retry)
-                    .GetAsync()
-                    .ReadJsonAs<Page<JsonPackage>>()
-                    .ConfigureAwait(false), configure)
+        var options = new GetPageOptions();
+        configure?.Invoke(options);
+
+        return await new PageCursor<JsonPackage>(async (page, pageSize) => await HttpClient.Rest()
+                .SetAppKey(authToken)
+                .SetHeader("accept", "application/json")
+                .SetPaths("v1", "package")
+                .AddQueries(new { page, pagesize = pageSize, options.Where, options.Include })
+                .UseRetry(options.Retry)
+                .GetAsync()
+                .ReadJsonAs<Page<JsonPackage>>()
+                .ConfigureAwait(false))
+            .GetAllPages()
             .ConfigureAwait(false);
     }
 

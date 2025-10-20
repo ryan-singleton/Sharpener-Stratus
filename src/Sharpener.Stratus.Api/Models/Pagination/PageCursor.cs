@@ -10,10 +10,26 @@ namespace Sharpener.Stratus.Api.Models.Pagination;
 /// <typeparam name="T"></typeparam>
 public sealed class PageCursor<T>
 {
-    private readonly Func<int, int, Task<Outcome<Page<T>>>> _func;
+    private readonly Func<int, int, Task<Outcome<Page<T>?>>> _func;
     private readonly int _pageSize;
     private int _currentPage;
     private bool _hasMore;
+
+    /// <summary>
+    ///     Creates a new paginated response cursor that can be iteratively walked through.
+    /// </summary>
+    /// <param name="func">
+    ///     The action to perform in order to obtain the response. Note that the two int parameters are the
+    ///     current page and pageSize within the context of the call, not the constructor (retaining changes to them that may
+    ///     take place).
+    /// </param>
+    public PageCursor(Func<int, int, Task<Outcome<Page<T>?>>> func)
+    {
+        _hasMore = true;
+        _currentPage = 1;
+        _pageSize = 0;
+        _func = func;
+    }
 
     /// <summary>
     ///     Creates a new paginated response cursor that can be iteratively walked through.
@@ -75,5 +91,20 @@ public sealed class PageCursor<T>
             _hasMore = page.PageOffset * page.PageLimit + page.PageCount < page.Total;
             return true;
         }, _ => false);
+    }
+
+    /// <summary>
+    ///     Iterates through every remaining page from the current page and onward, returning every result within those pages.
+    /// </summary>
+    /// <returns>The remaining items from this current page and onward.</returns>
+    public async Task<List<T>> GetAllPages()
+    {
+        var results = new List<T>();
+        while (await MoveNextAsync().ConfigureAwait(false))
+        {
+            results.AddRange(Current.Value.Data);
+        }
+
+        return results;
     }
 }

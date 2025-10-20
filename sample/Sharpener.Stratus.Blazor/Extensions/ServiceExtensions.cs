@@ -21,6 +21,7 @@ public static class ServiceExtensions
         services.TryAddScoped<ModelClient>();
         services.TryAddScoped<ProjectClient>();
         services.TryAddScoped<PackageClient>();
+        services.TryAddScoped<PartClient>();
         return services;
     }
 
