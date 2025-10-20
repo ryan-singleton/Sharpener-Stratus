@@ -1,19 +1,19 @@
-@page "/packages"
+@page "/parts"
 @using Sharpener.Extensions
 @using Sharpener.Stratus.Api.Clients
 @using Sharpener.Stratus.Blazor.Models
 @using Sharpener.Stratus.Blazor.Services
 @rendermode InteractiveServer
 @inject StratusSettings Settings
-@inject PackageClient PackageClient
+@inject PartClient PartClient
 @inject ConsoleService Console
 
-<PageTitle>Stratus NuGet Packages</PageTitle>
+<PageTitle>Stratus NuGet Parts</PageTitle>
 
-<h1>Stratus Packages</h1>
+<h1>Stratus Parts</h1>
 
 <div class="content">
-    <button @onclick="GetPackages">Get Packages</button>
+    <button @onclick="GetParts">Get Parts</button>
     <div class="d-flex mt-3">
         <span class="ms-2 align-self-center"> Where </span>
         <input class="flex-shrink-1 align-middle ms-2 flex-grow-1" aria-label="Filter" @bind="_where"
@@ -31,18 +31,20 @@
     private string? _where;
     private string? _include;
 
-    private async Task GetPackages()
+    private async Task GetParts()
     {
         var appKey = Settings.AppKey;
         var includes = _include?.Split(",").Select(x => x.Trim()) ?? [];
-        var outcome = await PackageClient.GetPackages(appKey, options =>
+        var outcome = await PartClient.GetParts(appKey, options =>
         {
             options.Where = _where;
             options.SetIncludes(includes.AsArray());
         });
         if (outcome.IsError) return;
 
-        Console.WriteToConsole("Get Packages success", outcome.Value);
+        Console.WriteToConsole("Get Parts success", outcome.Value
+            .Select(x => x.Stratify())
+        );
     }
 
 }

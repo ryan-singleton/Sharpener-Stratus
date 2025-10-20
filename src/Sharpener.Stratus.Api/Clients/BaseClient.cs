@@ -1,10 +1,6 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
 using Sharpener.Rest.Extensions;
-using Sharpener.Results;
-using Sharpener.Stratus.Api.Models.Options;
-using Sharpener.Stratus.Api.Models.Pagination;
-using Sharpener.Stratus.Api.Models.Responses;
 
 namespace Sharpener.Stratus.Api.Clients;
 
@@ -52,33 +48,5 @@ public class BaseClient
     {
         httpClient.SetBaseAddress(BaseUrl);
         HttpClient = httpClient;
-    }
-
-    /// <summary>
-    ///     Gets all pages for a specific HTTP Request to the Stratus API.
-    /// </summary>
-    /// <param name="func">The HTTP request to run per page.</param>
-    /// <param name="configure">The optional configuration for the request.</param>
-    /// <returns>A collection of responses.</returns>
-    protected static async Task<Outcome<IEnumerable<T>>> GetAllPages<T>(
-        Func<int, int, GetPageOptions<T>, Task<Outcome<Page<T>?>>> func,
-        Action<GetPageOptions<T>>? configure = null) where T : IJsonResponse
-    {
-        var options = new GetPageOptions<T>();
-        configure?.Invoke(options);
-
-        var cursor = new PageCursor<T>(null, null, async (page, pageSize) =>
-        {
-            var results = await func(page, pageSize, options).ConfigureAwait(false);
-            return results.Value!;
-        });
-
-        var results = new List<T>();
-        while (await cursor.MoveNextAsync().ConfigureAwait(false))
-        {
-            results.AddRange(cursor.Current.Value.Data);
-        }
-
-        return results;
     }
 }

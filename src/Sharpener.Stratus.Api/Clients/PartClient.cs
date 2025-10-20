@@ -26,18 +26,21 @@ public class PartClient : BaseClient
     /// <param name="configure">Optional configuration settings that come with fairly common defaults.</param>
     /// <returns>A collection of <see cref="JsonPart" />.</returns>
     public async Task<Outcome<IEnumerable<JsonPart>>> GetParts(string authToken,
-        Action<GetPageOptions<JsonPart>>? configure = null)
+        Action<GetPartPageOptions>? configure = null)
     {
-        return await GetAllPages(async (page, pageSize, options) =>
-                await HttpClient.Rest()
-                    .SetAppKey(authToken)
-                    .SetHeader("accept", "application/json")
-                    .SetPaths("v1", "part")
-                    .AddQueries(new { page, pagesize = pageSize, options.Where, options.Include })
-                    .UseRetry(options.Retry)
-                    .GetAsync()
-                    .ReadJsonAs<Page<JsonPart>>()
-                    .ConfigureAwait(false), configure)
+        var options = new GetPartPageOptions();
+        configure?.Invoke(options);
+
+        return await new PageCursor<JsonPart>(async (page, pageSize) => await HttpClient.Rest()
+                .SetAppKey(authToken)
+                .SetHeader("accept", "application/json")
+                .SetPaths("v1", "part")
+                .AddQueries(new { page, pagesize = pageSize, options.Where, options.Include })
+                .UseRetry(options.Retry)
+                .GetAsync()
+                .ReadJsonAs<Page<JsonPart>>()
+                .ConfigureAwait(false))
+            .GetAllPages()
             .ConfigureAwait(false);
     }
 }
