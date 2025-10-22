@@ -1,6 +1,7 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Sharpener.Stratus.Api.Extensions;
 using Sharpener.Stratus.Blazor.Components;
 using Sharpener.Stratus.Blazor.Extensions;
 using Sharpener.Stratus.Blazor.Models;
@@ -11,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.TryAddTransient<StratusSettings>();
-builder.Services.UseClients().UseConsole();
+builder.Services.AddStratus().AddConsole();
 
 var app = builder.Build();
 

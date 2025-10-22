@@ -14,7 +14,7 @@ public static class ServiceExtensions
         WriteIndented = true, IndentCharacter = ' ', IndentSize = 2
     };
 
-    public static IServiceCollection UseClients(this IServiceCollection services)
+    public static IServiceCollection AddStratus(this IServiceCollection services)
     {
         services.AddHttpClient();
         services.TryAddScoped<PingClient>();
@@ -25,7 +25,7 @@ public static class ServiceExtensions
         return services;
     }
 
-    public static IServiceCollection UseConsole(this IServiceCollection services)
+    public static IServiceCollection AddConsole(this IServiceCollection services)
     {
         services.TryAddSingleton<ConsoleService>();
         return services;

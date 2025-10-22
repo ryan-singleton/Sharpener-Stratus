@@ -4,8 +4,8 @@ using Sharpener.Rest.Retry;
 
 namespace Sharpener.Stratus.Api.Models.Options;
 
-/// <inheritdoc />
-public class GetPartPageOptions : IGetPageOptions
+/// <inheritdoc cref="IPaginationOptions" />
+public class GetPartPageOptions : IPaginationOptions, IHasIncludeOptions, IHasWhereOptions, IHasRetryOptions
 {
     /// <summary>
     ///     Pass true to this optional query parameter if you want to generate STRATUS.Part.* properties and have them returned
@@ -20,23 +20,26 @@ public class GetPartPageOptions : IGetPageOptions
     public bool ExcludeNullAndEmpty { get; set; }
 
     /// <inheritdoc />
-    public int? StartPage { get; set; }
-
-    /// <inheritdoc />
-    public int? PageSize { get; set; }
-
-    /// <inheritdoc />
-    public string? Where { get; set; }
-
-    /// <inheritdoc />
     public string? Include { get; private set; }
-
-    /// <inheritdoc />
-    public Action<RetryOptions>? Retry { get; set; }
 
     /// <inheritdoc />
     public void SetIncludes(params string[] includes)
     {
         Include = string.Join(", ", includes);
     }
+
+    /// <inheritdoc />
+    public Action<RetryOptions>? Retry { get; set; }
+
+    /// <inheritdoc />
+    public string? Where { get; set; }
+
+    /// <inheritdoc />
+    public int? StartPage { get; set; }
+
+    /// <inheritdoc />
+    public int? PageSize { get; set; }
+
+    /// <inheritdoc />
+    public bool DisableTotal { get; set; }
 }

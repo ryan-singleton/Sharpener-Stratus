@@ -6,9 +6,9 @@ using Sharpener.Stratus.Api.Models.Responses;
 namespace Sharpener.Stratus.Api.Models.Options;
 
 /// <summary>
-///     Get options for retrieving pages of <see cref="JsonPart" />.
+///     Get options for retrieving a <see cref="JsonBom" />.
 /// </summary>
-public class GetPageOptions : IPaginationOptions, IHasIncludeOptions, IHasWhereOptions, IHasRetryOptions
+public class GetBomOptions : IHasIncludeOptions, IHasRetryOptions
 {
     /// <inheritdoc />
     public string? Include { get; private set; }
@@ -21,16 +21,4 @@ public class GetPageOptions : IPaginationOptions, IHasIncludeOptions, IHasWhereO
 
     /// <inheritdoc />
     public Action<RetryOptions>? Retry { get; set; }
-
-    /// <inheritdoc />
-    public string? Where { get; set; }
-
-    /// <inheritdoc />
-    public int? StartPage { get; set; }
-
-    /// <inheritdoc />
-    public int? PageSize { get; set; }
-
-    /// <inheritdoc />
-    public bool DisableTotal { get; set; }
 }

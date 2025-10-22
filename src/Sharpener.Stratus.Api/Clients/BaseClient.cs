@@ -1,5 +1,6 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
+using System.Net;
 using Sharpener.Rest.Extensions;
 
 namespace Sharpener.Stratus.Api.Clients;
@@ -37,7 +38,8 @@ public class BaseClient
     /// <param name="httpClientFactory">The factory that manages the <see cref="HttpClient" /> pool.</param>
     protected BaseClient(IHttpClientFactory httpClientFactory)
     {
-        HttpClient = httpClientFactory.CreateUrlClient(BaseUrl);
+        HttpClient = httpClientFactory.CreateClient("Stratus API");
+        MaybeSetBaseUrl();
     }
 
     /// <summary>
@@ -46,7 +48,13 @@ public class BaseClient
     [Obsolete(ObsoleteClientCtorMessage)]
     protected BaseClient(HttpClient httpClient)
     {
-        httpClient.SetBaseAddress(BaseUrl);
         HttpClient = httpClient;
+        MaybeSetBaseUrl();
+    }
+
+    private void MaybeSetBaseUrl()
+    {
+        if (HttpClient.BaseAddress is not null) return;
+        HttpClient.BaseAddress = new Uri(BaseUrl);
     }
 }

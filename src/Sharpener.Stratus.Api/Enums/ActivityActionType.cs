@@ -1,12 +1,14 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace Sharpener.Stratus.Api.Enums;
 
 /// <summary>
 ///     The enumeration of possible actions taken during an activity.
 /// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ActivityActionType
 {
     /// <summary>

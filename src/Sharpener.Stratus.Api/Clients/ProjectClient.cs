@@ -35,7 +35,14 @@ public class ProjectClient : BaseClient
                 .SetAppKey(authToken)
                 .SetHeader("accept", "application/json")
                 .SetPaths("v2", "project")
-                .AddQueries(new { page, pagesize = pageSize, options.Where, options.Include })
+                .AddQueries(new
+                {
+                    page,
+                    pagesize = pageSize,
+                    options.Where,
+                    options.Include,
+                    options.DisableTotal
+                })
                 .UseRetry(options.Retry)
                 .GetAsync()
                 .ReadJsonAs<Page<JsonProject>>()

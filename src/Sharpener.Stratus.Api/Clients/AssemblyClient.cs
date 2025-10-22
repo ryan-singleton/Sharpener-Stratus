@@ -10,22 +10,23 @@ using Sharpener.Stratus.Api.Models.Responses;
 namespace Sharpener.Stratus.Api.Clients;
 
 /// <summary>
-///     The client for interacting with the Part endpoints on the Stratus API.
+///     The client for interacting with the Project endpoints on the Stratus API.
 /// </summary>
-public class PartClient : BaseClient
+public class AssemblyClient : BaseClient
 {
     /// <inheritdoc />
-    public PartClient(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+    public AssemblyClient(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
     {
     }
 
     /// <summary>
-    ///     Gets a collection of <see cref="JsonPart" /> references that represent parts.
+    ///     Gets a collection of <see cref="JsonPart" /> references related to the provided assembly.
     /// </summary>
     /// <param name="authToken">The "app-key" authorization token for the request.</param>
+    /// <param name="assemblyId">The identifier of the assembly to get the parts for.</param>
     /// <param name="configure">Optional configuration settings that come with fairly common defaults.</param>
     /// <returns>A collection of <see cref="JsonPart" />.</returns>
-    public async Task<Outcome<IEnumerable<JsonPart>>> GetParts(string authToken,
+    public async Task<Outcome<IEnumerable<JsonPart>>> GetParts(string authToken, string assemblyId,
         Action<GetPartPageOptions>? configure = null)
     {
         var options = new GetPartPageOptions();
@@ -35,7 +36,7 @@ public class PartClient : BaseClient
                 await HttpClient.Rest()
                     .SetAppKey(authToken)
                     .SetHeader("accept", "application/json")
-                    .SetPaths("v1", "part")
+                    .SetPaths("v1", "assembly", assemblyId, "parts")
                     .AddQueries(new
                     {
                         page,
