@@ -4,6 +4,8 @@ using Sharpener.Rest.Extensions;
 using Sharpener.Rest.Retry;
 using Sharpener.Results;
 using Sharpener.Stratus.Api.Extensions;
+using Sharpener.Stratus.Api.Models.Options;
+using Sharpener.Stratus.Api.Models.Pagination;
 using Sharpener.Stratus.Api.Models.Responses;
 
 namespace Sharpener.Stratus.Api.Clients;
@@ -16,6 +18,38 @@ public class ModelClient : BaseClient
     /// <inheritdoc />
     public ModelClient(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
     {
+    }
+
+    /// <summary>
+    ///     Gets a collection of <see cref="JsonModel" /> references that represent models.
+    /// </summary>
+    /// <param name="authToken">The "app-key" authorization token for the request.</param>
+    /// <param name="configure">Optional configuration settings that come with fairly common defaults.</param>
+    /// <returns>A collection of <see cref="JsonModel" />.</returns>
+    public async Task<Outcome<IEnumerable<JsonModel>>> GetModels(string authToken,
+        Action<GetPageOptions>? configure = null)
+    {
+        var options = new GetPageOptions();
+        configure?.Invoke(options);
+
+        return await new PageCursor<JsonModel>(async (page, pageSize) => await HttpClient.Rest()
+                .SetAppKey(authToken)
+                .SetHeader("accept", "application/json")
+                .SetPaths("v1", "model")
+                .AddQueries(new
+                {
+                    page,
+                    pagesize = pageSize,
+                    options.Where,
+                    options.Include,
+                    options.DisableTotal
+                })
+                .UseRetry(options.Retry)
+                .GetAsync()
+                .ReadJsonAs<Page<JsonModel>>()
+                .ConfigureAwait(false))
+            .GetAllPages()
+            .ConfigureAwait(false);
     }
 
     /// <summary>
